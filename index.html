@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- fontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css"
+      integrity="sha512-8RxmFOVaKQe/xtg6lbscU9DU0IRhURWEuiI0tXevv+lXbAHfkpamD4VKFQRto9WgfOJDwOZ74c/s9Yesv3VvIQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!--  -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: "#da373d",
+              color1: "#0D6EFD",
+            },
+          },
+        },
+      };
+    </script>
+    <!--  -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      .font-poppins {
+        font-family: "Poppins", sans-serif;
+      }
+      @media screen and (min-width: 600px) and (max-width: 1000px) {
+        #phone-container {
+          grid-template-columns: 300px 300px;
+        }
+      }
+      ::-webkit-scrollbar{ display: none;}
+    </style>
+    <title>Phone Hunter</title>
+  </head>
+  <body class="font-poppins">
+    <header class="flex flex-col items-center gap-20 md:p-10">
+      <section class="flex justify-between items-center w-full">
+        <h1 class="text-xl md:text-4xl font-medium">Hot Gadgets</h1>
+        <button class="btn bg-color1 text-white px-10">Sign Up</button>
+      </section>
+      <section class="flex flex-col justify-center items-center gap-10">
+        <div class="flex flex-col justify-center items-center gap-5">
+          <h1 class="text-2xl md:text-4xl font-bold capitalize">
+            apple iphone 13 pro max
+          </h1>
+          <p class="text-gray-400 text-center">
+            There are many variations of passages of Lorem Ipsum available, but
+            the majority <br />
+            have suffered alteration in some form, by injected humou.
+          </p>
+          <button class="btn bg-color1 px-8 text-white">Buy Now</button>
+        </div>
+        <div class="w-full">
+          <img src="images/Group 48095420.png" alt="" />
+        </div>
+        <div class="flex flex-col justify-center items-center gap-8">
+          <h1 class="text-2xl md:text-4xl capitalize font-medium">
+            search your phone
+          </h1>
+          <div class="flex flex-col md:flex-row gap-2">
+            <label class="input input-bordered flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="w-4 h-4 opacity-70"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <input
+                type="text"
+                id="phone-name"
+                class="md:w-[450px]"
+                placeholder="Search Your Phone"
+              />
+            </label>
+            <button
+              onclick="searchHaldeler()"
+              class="btn bg-color1 text-white px-8"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </section>
+    </header>
+    <main
+      class="mt-20 flex flex-col justify-center items-center gap-10 relative"
+    >
+      <!-- spenner section -->
+      <section id="loader" class="mb-10 hidden">
+        <span class="loading loading-spinner loading-lg"></span>
+      </section>
+      <section>
+        <div
+          id="phone-container"
+          class="grid grid-cols-1 md:grid-cols-3 gap-10"
+        ></div>
+      </section>
+      <div class="hidden" id="show-all-content">
+        <button
+          onclick="handleShowAll()"
+          class="btn bg-color1 px-10 text-white"
+        >
+          See More
+        </button>
+      </div>
+      <!-- Open the modal using ID.showModal() method -->
+
+      <!-- Open the modal using ID.showModal() method -->
+      <dialog id="my_modal_1" class="modal mt-4 overflow-auto"></dialog>
+      <dialog id="my_modal_2" class="modal">
+        <div class="modal-box">
+          <h3 class="font-bold text-lg">No Result Found!</h3>
+          <p>Please Enter Valid Mobile Name.</p>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button, it will close the modal -->
+              <button class="btn bg-color1 text-white px-10">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+    </main>
+    <footer class="footer footer-center p-5 md:p-14 bg-[#0D6EFD0D] mt-24 shadow-lg">
+      <section class="flex flex-col md:flex-row justify-between items-center gap-5 w-full">
+        <div>
+          <h1 class="text-3xl font-medium">Hot Gadgets</h1>
+          <p class="text-sm text-gray-400 mt-4">You Can definitely Work.</p>
+        </div>
+        <div class="flex items-center justify-center gap-5">
+          <span class="text-2xl text-[#316FF6]"><i class="fab fa-facebook"></i></span>
+          <span class="text-2xl text-[#1DA1F2]"><i class="fab fa-twitter"></i></span>
+          <span class="text-2xl text-[#cd486b]"><i class="fab fa-instagram"></i></span>
+          <button class="btn bg-color1 text-white px-10 border-0">Join Premiun</button>
+        </div>
+      </section>
+      <div class="border-[1px] border-gray-300 w-full rounded-lg"></div>
+      <section class="footer grid grid-cols-2 md:grid-cols-4 gap-4">
+        <nav>
+          <h6 class="footer-title">Product</h6> 
+          <a class="link link-hover">Browser jobs</a>
+          <a class="link link-hover">REmote jobs</a>
+          <a class="link link-hover">Startup jobs</a>
+          <a class="link link-hover">Company jobs</a>
+        </nav> 
+        <nav>
+          <h6 class="footer-title">Popular</h6> 
+          <a class="link link-hover">UI/UX Designer</a>
+          <a class="link link-hover">Product Design</a>
+          <a class="link link-hover">Back-End Developer</a>
+          <a class="link link-hover">Front-End Developer</a>
+        </nav> 
+        <nav>
+          <h6 class="footer-title">Resource</h6> 
+          <a class="link link-hover">Faq</a>
+          <a class="link link-hover">Support</a>
+          <a class="link link-hover">Privacy Policy</a>
+          <a class="link link-hover">Terms of Service</a>
+        </nav> 
+        <nav>
+          <h6 class="footer-title">Company</h6> 
+          <a class="link link-hover">About Us</a>
+          <a class="link link-hover">Contact Us</a>
+          <a class="link link-hover">Carerr Tips</a>
+          <a class="link link-hover">Career</a>
+        </nav> 
+      </section>
+    </footer>
+    <!-- script file -->
+    <script src="js/phone.js"></script>
+  </body>
+</html>
